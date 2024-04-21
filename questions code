@@ -1,0 +1,37 @@
+questions = [
+    "What is the capital city of Australia?",
+    "Who painted the Mona Lisa?",
+    "What is the chemical symbol for water?",
+    'Which planet is known as the "Red Planet"?',
+    "What is the tallest mountain in the world?",
+    'Who wrote the novel "1984"?',
+    "What is the chemical symbol for gold?",
+    "Which continent is the largest by land area?",
+    "Who discovered penicillin?",
+    "What is the chemical formula for glucose?"
+]
+
+options = [
+    ['A: Melbourne', 'B: Perth', 'C: Brisbane', 'D: Canberra'],
+    ['A: Vincent van Gogh', 'B: Pablo Picasso', 'C: Michelangelo', 'D: Leonardo da Vinci'],
+    ['A: Wa', 'B: O', 'C: H2', 'D: H2O'],
+    ['A: Venus', 'B: Jupiter', 'C: Saturn', 'D: Mars'],
+    ['A: K2', 'B: Mount Kilimanjaro', 'C: Mount McKinley', 'D: Mount Everest'],
+    ['A: George Eliot', 'B: Ernest Hemingway', 'C: F. Scott Fitzgerald', 'D: George Orwell'],
+    ['A: Ag', 'B: Au', 'C: Fe', 'D: Au'],
+    ['A: Europe', 'B: Africa', 'C: North America', 'D: Asia'],
+    ['A: Ellen Osturn,', 'B: Louis Pasteur', 'C: Marie Curie', 'D: Alexander Fleming'],
+    ['A: G', 'B: C6O12', 'C: H2O', 'D: C6H12O6']
+]
+
+correct_answers = ['D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D']
+
+for i in range(len(questions)):
+    print("\nQuestion:", questions[i])
+    for option in options[i]:
+        print(option)
+    answer = input("Answer: ").upper()
+    if answer == correct_answers[i]:
+        print("Correct!")
+    else:
+        print("Wrong!")
