@@ -1,4 +1,19 @@
 import random
+
+class ANSI():
+    def background(code):
+        return "\33[{code}m".format(code=code)
+ 
+    def style_text(code):
+        return "\33[{code}m".format(code=code)
+ 
+    def color_text(code):
+        return "\33[{code}m".format(code=code)
+    
+qtro_color = ANSI.color_text(35) + ANSI.color_text(1)
+kgia_color = ANSI.color_text(1)
+nchoi_color = ANSI.color_text(0)
+
 questions = [
     "What is the capital city of Australia?",
     "Who painted the Mona Lisa?",
@@ -26,45 +41,65 @@ options = [
 ]
 
 correct_answers = ['D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D']
-y_kien_khan_gia = ['A','B', 'D','C','A','C','D','D']
+
+y_kien_khan_gia = ['A','B', 'D','C','A','C','D','D','B','D']
+so_lan_tro_giup = 5
+
 money_score = 0
 wrong = 0
 corr = 0
-print('luat cua tro choi ai la ty phu: \n 1. Neu muon hoi y kien cua khan gia, hay ghi "hoi y kien khan gia" vao o dap an ')
+
+
+print(qtro_color + "luat cua tro choi ai la ty phu: \n 1. Neu muon hoi y kien cua khan gia, hay ghi \"hoi y kien khan gia\" hoac \"hykg\" vao o dap an ")
+
 for i in range(1,len(questions)+1):
-    print( "\nso tien thuong cua ban hien tai la", money_score)
+    boo = True
+
+    print(qtro_color +  "\nSo tien thuong cua ban hien tai la", money_score)
+    print(qtro_color + "Ban con", so_lan_tro_giup, "lan tro giup \n")
     if i < 5:
-        print("Question:", questions[i-1], "So tien thuong cua cau hoi nay la", money_score + 100000 * i)
+        print(qtro_color + "Question:", questions[i-1], "So tien thuong cua cau hoi nay la", money_score + 100000 * i)
     else:
-        print("Question:", questions[i-1], "So tien thuong cua cau hoi nay la", money_score + 100000 * i)
+        print(qtro_color + "Question:", questions[i-1], "So tien thuong cua cau hoi nay la", money_score + 100000 * i)
     for option in options[i-1]:
         print(option)
-    answer = input("Answer: ").upper()
-    if answer == correct_answers[i-1]:
-        corr +=1
-        if i < 5:
-            print("Dung! So tien thuong cua ban da duoc cong", money_score + 100000 * i)
-            money_score += 100000 * i
+
+    while boo:
+        answer = input(nchoi_color + "Answer: ").upper()
+        if answer == correct_answers[i-1]:
+            corr +=1
+            boo = False
+            if i < 5:
+                print(qtro_color + "Dung! So tien thuong cua ban da duoc cong", money_score + 100000 * i)
+                money_score += 100000 * i
+            else:
+                print(qtro_color + "Dung! So tien thuong cua ban da duoc cong", money_score + 1000000 * i )
+                money_score += 1000000 * i
+
+        elif answer == "HOI Y KIEN KHAN GIA" or answer == "HYKG" or answer == "HYKKG":
+            if so_lan_tro_giup > 0:
+                so_lan_tro_giup -= 1
+                ran = random.randint(0,7)
+                ykien = y_kien_khan_gia[ran]
+                print(kgia_color + "\nKhan gia: \n Toi nghi dap an cua cau hoi nay la", ykien, "\n")
+                print(qtro_color + "Vay dap an cua ban la gi? ")
+            else:
+                print(qtro_color + "Ban da het so lan tro giup \n")
+
         else:
-            print("Dung! So tien thuong cua ban da duoc cong", money_score + 1000000 * i )
-            money_score += 1000000 * i
-    # elif answer == "HOI Y KIEN KHAN GIA":
-    #     ran = random.randint(0,7)
-    #     ykien = y_kien_khan_gia[ran]
-    #     print("Toi nghi dap an cua cau hoi nay la", ykien)
-    #     answer = input("Vay dap an cua ban la gi? ")
-        
-    else:
-        wrong += 1
-        if i < 5:
-            print("Sai! So tien thuong cua ban da bi tru", 1000 * i)
-            money_score -= 1000 * i
-        elif i < 8:
-            print("Sai! So tien thuong cua ban da bi tru", 1000000 * i)
-            money_score -= 1000000 * i
-        else:
-            print("Sai! So tien thuong cua ban da bi tru", 100000 * i)
-            money_score -= 100000 * i
-        if money_score < 0:
-            money_score = 0
-print("so tien thuong ban duoc sau", corr, "cau hoi dung va", wrong,"cau hoi sai la:",money_score)
+            wrong += 1
+            boo = False
+            if i < 5:
+                print(qtro_color + "Sai! So tien thuong cua ban da bi tru", 1000 * i)
+                money_score -= 1000 * i
+            elif i < 8:
+                print(qtro_color + "Sai! So tien thuong cua ban da bi tru", 1000000 * i)
+                money_score -= 1000000 * i
+            else:
+                print(qtro_color + "Sai! So tien thuong cua ban da bi tru", 100000 * i)
+                money_score -= 100000 * i
+
+            if money_score < 0:
+                money_score = 0
+
+print(qtro_color + "so tien thuong ban duoc sau", corr, "cau hoi dung va", wrong,"cau hoi sai la:",money_score)
